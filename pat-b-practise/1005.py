@@ -1,18 +1,19 @@
 cnt = int(raw_input())
 num = [int(item) for item in raw_input().split()]
-hist = list(num)
+root = list(num)
+child = dict()
+
 for item in num:
 	while item != 1:
 		if item & 0x1 == 0:
 			item = item / 2
-			hist.append(item)
+			child[item] = True
 		else:
 			item = (item * 3 + 1) / 2
-			hist.append(item)
-dic = {item:hist.count(item) for item in hist}
+			child[item] = True
 rlt = []
-for item in dic:
-	if dic[item] == 1:
+for item in root:
+	if not child.has_key(item):
 		rlt.append(item)
 rlt = sorted(rlt, reverse = True)
 rlt_str = ""
